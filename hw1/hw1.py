@@ -133,9 +133,9 @@ if __name__ == '__main__':
     
     start = time.time()
     train = file_processing('train.csv', 'big5')
+    
     x, y = data_processing(train)
 
-    
     w = np.ones(len(x[0][0]))
     b = 1
     repeat = 1000

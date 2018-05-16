@@ -1,3 +1,4 @@
+import time
 import numpy as np
 from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation
@@ -29,6 +30,7 @@ def load_data():
     return (x_train, y_train), (x_test, y_test)
 
 if __name__ == '__main__':
+    start = time.time()
     (x_train, y_train), (x_test, y_test) = load_data()
 
     x_train = x_train.reshape(x_train.shape[0], 28, 28, 1) # 此為Tensorflow寫法
@@ -46,7 +48,7 @@ if __name__ == '__main__':
     model2.compile(loss='categorical_crossentropy', optimizer='Adam', metrics=['accuracy'])
 
     model2.fit(x_train, y_train, batch_size=100, epochs=20)
-
+    print("Time: ", time.time() - start)
     result = model2.evaluate(x_train, y_train)
     print('\nTrain Acc: ', result[1])
 
@@ -54,4 +56,3 @@ if __name__ == '__main__':
     print('\nTest Acc: ', result[1])
 
     model2.save('cnn_demo_model.h5')
-    
